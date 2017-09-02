@@ -1,0 +1,32 @@
+<%= form_for(@todo) do |f| %>
+  <% if @todo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+
+      <ul>
+      <% @todo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= link_to_add_association 'Add Category', f, :categories, 'data-association-insertion-node' => "#categories-task ol", 'data-association-insertion-method' => "append", :wrap_object => Proc.new{|category| category.build_task; category }%>
+
+<fieldset id="categories-task">
+  <ol>
+    <%= f.fields_for :categories do |category| %>
+      <%= render partial: "category_fields", locals: {f: category} %>
+      <% end %>
+  </ol>
+</fieldset>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

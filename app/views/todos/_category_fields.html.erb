@@ -1,0 +1,13 @@
+<li class="control-group nested-fields">
+	<div class="controls">
+		<%= f.label :category %>
+		<%= f.text_field :name %>
+
+		<%= f.fields_for :task do |category_task| %>
+			<%= category_task.label :task %>
+			<%= category_task.text_field :name %>
+		<% end %>
+
+		<%= link_to_remove_association "Remove", f %>
+	</div>
+</li>
