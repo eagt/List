@@ -3,11 +3,13 @@
 		<%= f.label :category %>
 		<%= f.text_field :name %>
 
+		<!-- Problamente here Add task link -->
+
 		<%= f.fields_for :task do |category_task| %>
 			<%= category_task.label :task %>
 			<%= category_task.text_field :name %>
 		<% end %>
 
-		<%= link_to_remove_association "Remove", f %>
+		<%= link_to_remove_association "Remove Category", f %>
 	</div>
 </li>
