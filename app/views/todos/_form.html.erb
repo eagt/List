@@ -9,7 +9,9 @@
 	    <%= f.fields_for :categories do |category| %>
 	      <%= render partial: "category_fields", locals: {f: category} %>
 	      <% end %>
-	  </ol>
+	   </ol>
+
+	   <%# <%= link_to_add_association 'Add Task', f, :tas, 'data-association-insertion-node' => "#categories-task ol", 'data-association-insertion-method' => "append", :wrap_object => Proc.new{|category| category.build_task; category }%>
 
 	</fieldset>
 	    <%= f.button :submit %>
