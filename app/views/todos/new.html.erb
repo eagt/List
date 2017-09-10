@@ -1,11 +1,10 @@
 <br>
 <div class="row">
-		<div class="col-8 mx-auto"> <%# This will take 8 columns and center them %> 
+		<div class="col-12 mx-auto"> <%# This will take 8 columns and center them %> 
 			<h1>New Todo</h1>
 			<br>
-
 			<%= render 'form', todo: @todo %>
-
-			<%= link_to 'Back', todos_path %>
+			<br>
+			<%= link_to 'Back', todos_path, class: 'btn btn-secondary' %>
 		</div>
 </div>

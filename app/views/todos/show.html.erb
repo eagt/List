@@ -6,21 +6,12 @@
 </p>
 
 <p>
-  <strong>Category:</strong>
-    <ol>
-  <% for category in @todo.categories %>
-  	<li><%= category.name %></li>
-  	<% end %>
-  </ol>
-</p>
-
-<p>
   <strong>Task:</strong>
-    <ol>
+  
   <% for task in @todo.tasks %>
   	<li><%=h task.name %></li>
   	<% end %>
-  </ol>
+
 </p>
 
 <%= link_to 'Edit', edit_todo_path(@todo) %> |
