@@ -38,6 +38,9 @@ abbr[title="required"]{
    margin:10px 20px;
 }
 
+.table_app{
+  @extend .table;
+  @extend .table-responsive;
+  @extend .table-striped;
+}
 
-
- 
