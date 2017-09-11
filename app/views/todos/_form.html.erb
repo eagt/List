@@ -6,28 +6,51 @@
   </div>
   <br>
   <h3>Tasks</h3>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Task Name</th>
+              <th>Completed</th>
+            </tr>
+          </thead>
+          <tbody class='tasks'>
+            <%= f.simple_fields_for :tasks do |builder| %>
+              <%= render 'task_fields', f: builder %>
+            <% end %>
+          </tbody>
+        </table>
 
-  <table class='table'>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Task Name</th>
-        <th>Completed</th>
-      </tr>
-    </thead>
-    <tbody class='tasks'>
-      <%= f.simple_fields_for :tasks do |builder| %>
-        <%= render 'task_fields', f: builder %>
-      <% end %>
-    </tbody>
+        <div class="form-actions">
+          <%= link_to_add_association 'Add Task', f, :tasks, class: 'btn btn-primary btn-sm', data: { association_insertion_node: '.tasks', association_insertion_method: :append } %>
+        </div>
+        <br>
 
-  </table>
+      <h3>Tags</h3>
 
-  <div class="form-actions">
-    <%= link_to_add_association 'Add Task', f, :tasks, class: 'btn btn-primary btn-sm', data: { association_insertion_node: '.tasks', association_insertion_method: :append } %>
-  </div>
-  <br>
+         <%= link_to_add_association 'Add List Tag', f, :list_tags, class: 'btn btn-primary btn-sm', 'data_association_insertion_node' => "#listado_tags ol", 'data_association_insertion_method' => "append",
+            :wrap_object => Proc.new {|list_tag| list_tag.build_tag; list_tag } %>
+      <hr/>
+       <table class='table'>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Tag Name</th>
+            </tr>
+          </thead>
 
-  <%= f.button :submit, value: "Create Todo List", class:'btn btn-success btn-sm' %>
-  <%= link_to 'Back', todos_path, class: 'btn btn-secondary' %>
+          <tbody id='listado_tags'>
+            <%= f.simple_fields_for :list_tags do |list_tag| %>
+              <%= render 'list_tag_fields', locals: {f: list_tag} %>
+            <% end %>
+          </tbody>
+        </table>
+        
+
+       
+      <br>
+      <div>  
+        <%= f.button :submit, value: "Create Todo List", class:'btn btn-success btn-sm' %>
+        <%= link_to 'Back', todos_path, class: 'btn btn-secondary' %>
+      </div>
 <% end %>
