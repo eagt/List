@@ -18,39 +18,26 @@
             <%= f.simple_fields_for :tasks do |builder| %>
               <%= render 'task_fields', f: builder %>
             <% end %>
-          </tbody>
-        </table>
+          </tbody> 
+        </table>    
+        <%= link_to_add_association 'Add Task', f, :tasks, class: 'btn btn-primary btn-sm', data: { association_insertion_node: '.tasks', association_insertion_method: :append } %>
+          <br>
+          <hr/>
 
-        <div class="form-actions">
-          <%= link_to_add_association 'Add Task', f, :tasks, class: 'btn btn-primary btn-sm', data: { association_insertion_node: '.tasks', association_insertion_method: :append } %>
-        </div>
-        <br>
+  <h3>Tags</h3> <!-- Nested attributes association has_many :through -->        
 
-      <h3>Tags</h3>
+      <%= link_to_add_association 'Add Tag', f, :list_tags, class: 'btn btn-primary btn-sm',  'data-association-insertion-node' => "   #list_tags-tag", 'data-association-insertion-method' => "append", :wrap_object => Proc.new{|list_tag| list_tag.build_tag;  list_tag }%>
 
-         <%= link_to_add_association 'Add List Tag', f, :list_tags, class: 'btn btn-primary btn-sm', 'data_association_insertion_node' => "#listado_tags ol", 'data_association_insertion_method' => "append",
-            :wrap_object => Proc.new {|list_tag| list_tag.build_tag; list_tag } %>
-      <hr/>
-       <table class='table'>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Tag Name</th>
-            </tr>
-          </thead>
+      <fieldset id="list_tags-tag">    
+          <%= f.fields_for :list_tags do |list_tag| %>
+            <%= render partial: "list_tag_fields", locals: {f: list_tag} %>
+          <% end %>
+      </fieldset>
 
-          <tbody id='listado_tags'>
-            <%= f.simple_fields_for :list_tags do |list_tag| %>
-              <%= render 'list_tag_fields', locals: {f: list_tag} %>
-            <% end %>
-          </tbody>
-        </table>
-        
-
-       
+      <br>      
       <br>
       <div>  
-        <%= f.button :submit, value: "Create Todo List", class:'btn btn-success btn-sm' %>
-        <%= link_to 'Back', todos_path, class: 'btn btn-secondary' %>
+        <%= f.button :submit, value: "Create Todo List", class: 'btn btn-success btn-sm' %>
+        <%= link_to 'Back', todos_path, class: 'btn btn-secondary btn-sm' %>
       </div>
 <% end %>
