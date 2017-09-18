@@ -28,5 +28,25 @@
     box-shadow: inset 0 0 2px black;
 }
 
+/* Whit this code I'm removing the asterisk of the required fields so they won't show */
+abbr[title="required"]{
+   display: none; 
+   }
 
- 
+/* this will help with the spaces on inline forms */
+   .form-inline > * {
+   margin:10px 20px;
+}
+
+.table_app{
+  @extend .table;
+  @extend .table-responsive;
+  @extend .table-striped;
+}
+
+.card-block {
+    -webkit-box-flex: 1;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+

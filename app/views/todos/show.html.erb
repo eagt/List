@@ -1,27 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @todo.name %>
-</p>
+<div class="card card-outline-success">
+	<div class="card-header card-inverse card-success text-center"">
+	   	<p>
+		  <strong><%= @todo.name %></strong>	  
+		</p>
+	</div>
+	<p>
+	
+	<div class= "card-block">
+	  <strong>Tasks:</strong> <%# in this way will show the elements  as a list( marking each element with dots <li>) %> 	  
+	  <% for task in @todo.tasks %>
+	  	<li><%=h task.name %></li>
+	  	<% end %>
+	</p>
 
-<p>
-  <strong>Category:</strong>
-    <ol>
-  <% for category in @todo.categories %>
-  	<li><%= category.name %></li>
-  	<% end %>
-  </ol>
-</p>
+	<p> <%# in this way will show the elements as a list(<ul> without marking each element with dots) %> 
+	  <strong>Tags:</strong>	  
+	  <% for tag in @todo.tags %>
+	  	<ul><%=h tag.name %></ul>
+	  	<% end %>
+	</p>
+	
+<%= link_to 'Edit', edit_todo_path(@todo), class: 'btn btn-primary btn-sm' %> 
+<%= link_to 'Back', todos_path, class: 'btn btn-secondary btn-sm' %>
 
-<p>
-  <strong>Task:</strong>
-    <ol>
-  <% for task in @todo.tasks %>
-  	<li><%=h task.name %></li>
-  	<% end %>
-  </ol>
-</p>
-
-<%= link_to 'Edit', edit_todo_path(@todo) %> |
-<%= link_to 'Back', todos_path %>
+</div>

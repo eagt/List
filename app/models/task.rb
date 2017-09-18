@@ -1,6 +1,6 @@
 class Task < ApplicationRecord
 
-has_many :categories,  inverse_of: :task
-has_many :todos,  through: :categories
+	validates_presence_of :name
 
+	belongs_to :todo, optional: :true
 end

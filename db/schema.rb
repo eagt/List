@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170910054108) do
+=======
+ActiveRecord::Schema.define(version: 20170911090703) do
+>>>>>>> nestedThrough
 
   create_table "categories", force: :cascade do |t|
     t.integer  "todo_id"
@@ -26,6 +30,13 @@ ActiveRecord::Schema.define(version: 20170910054108) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+<<<<<<< HEAD
+=======
+    t.integer  "todo_id"
+    t.integer  "tag_id"
+    t.index ["tag_id"], name: "index_list_tags_on_tag_id"
+    t.index ["todo_id"], name: "index_list_tags_on_todo_id"
+>>>>>>> nestedThrough
   end
 
   create_table "tags", force: :cascade do |t|

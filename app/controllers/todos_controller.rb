@@ -15,6 +15,9 @@ class TodosController < ApplicationController
   # GET /todos/new
   def new
     @todo = Todo.new
+   
+    
+    
   end
 
   # GET /todos/1/edit
@@ -69,6 +72,11 @@ class TodosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def todo_params
-      params.require(:todo).permit(:id, :name, :categories_attributes => [:id, :name, :todo_id, :task_id, :_destroy, :task_attributes => [:id, :name]])
-    end
+      params.require(:todo).permit(:name, 
+                                  tasks_attributes: Task.attribute_names.map(&:to_sym).push(:_destroy), 
+                                  list_tags_attributes: [ListTag.attribute_names.map(&:to_sym).push(:_destroy), # Note the nested part started with the open square brackets([ )
+                                  tag_attributes: [Tag.attribute_names.map(&:to_sym).push(:_destroy)]]) # Note that this one is singular tag_attributes NOT Tags, this is because of the association through
+                                                                                                        # On this last line we also close both square brackets
+ end
 end
+

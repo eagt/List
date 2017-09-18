@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+ root :to => "todos#index"
+  resources :list_tags
+  resources :tags
   resources :tasks
   resources :categories
   resources :todos
