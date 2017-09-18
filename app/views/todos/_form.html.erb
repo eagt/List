@@ -1,23 +1,43 @@
-	
 <%= simple_form_for(@todo) do |f| %>
-  <%= f.input :name, input_html: {class: "form-control"} %>
+  <%#= f.error_notification %>
 
-  <%= link_to_add_association 'Add Category', f, :categories, 'data-association-insertion-node' => "#categories-task ol", 'data-association-insertion-method' => "append", :wrap_object => Proc.new{|category| category.build_task; category }%>
+  <div class="form-inputs">
+    <%= f.input :name, input_html: {class: "form-control"} %>
+  </div>
+  <br>
+  <h3>Tasks</h3>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Task Name</th>
+              <th>Completed</th>
+            </tr>
+          </thead>
+          <tbody class='tasks'>
+            <%= f.simple_fields_for :tasks do |builder| %>
+              <%= render 'task_fields', f: builder %>
+            <% end %>
+          </tbody> 
+        </table>    
+        <%= link_to_add_association 'Add Task', f, :tasks, class: 'btn btn-primary btn-sm', data: { association_insertion_node: '.tasks', association_insertion_method: :append } %>
+          <br>
+          <hr/>
 
-	<fieldset id="categories-task">
-	  <ol>
-	    <%= f.fields_for :categories do |category| %>
-	      <%= render partial: "category_fields", locals: {f: category} %>
-	      <% end %>
-	   </ol>
+  <h3>Tags</h3> <!-- Nested attributes association has_many :through -->        
 
-	   <%# <%= link_to_add_association 'Add Task', f, :tas, 'data-association-insertion-node' => "#categories-task ol", 'data-association-insertion-method' => "append", :wrap_object => Proc.new{|category| category.build_task; category }%>
+      <%= link_to_add_association 'Add Tag', f, :list_tags, class: 'btn btn-primary btn-sm',  'data-association-insertion-node' => "   #list_tags-tag", 'data-association-insertion-method' => "append", :wrap_object => Proc.new{|list_tag| list_tag.build_tag;  list_tag }%>
 
-	</fieldset>
-	    <%= f.button :submit %>
-	<% end %>
+      <fieldset id="list_tags-tag">    
+          <%= f.fields_for :list_tags do |list_tag| %>
+            <%= render partial: "list_tag_fields", locals: {f: list_tag} %>
+          <% end %>
+      </fieldset>
 
-
-
-
-
+      <br>      
+      <br>
+      <div>  
+        <%= f.button :submit, value: "Create Todo List", class: 'btn btn-success btn-sm' %>
+        <%= link_to 'Back', todos_path, class: 'btn btn-secondary btn-sm' %>
+      </div>
+<% end %>
